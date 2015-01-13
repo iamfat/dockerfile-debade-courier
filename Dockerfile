@@ -4,7 +4,7 @@ MAINTAINER jia.huang@geneegroup.com
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install Basic Packages
-RUN apt-get update && apt-get install -y python-pip python-dev
+RUN apt-get update && apt-get install -y curl apt-utils python-pip python-dev
 
 # Install ZeroMQ
 RUN curl -sLo /usr/local/lib/libzmq.so.4.0.0 http://d.genee.cn/packages/zeromq-4/libzmq.so.4.0.0 && \
