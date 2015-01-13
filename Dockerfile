@@ -15,4 +15,6 @@ RUN curl -sLo /usr/local/lib/libzmq.so.4.0.0 http://d.genee.cn/packages/zeromq-4
 RUN pip install debade-courier && mkdir -p /etc/debade && mkdir -p /var/run/debade
 ADD courier.yml /etc/debade/courier.yml
 
-CMD ["/usr/local/bin/debade-courier", "-c", "/etc/debade/courier.yml"]
+EXPOSE 3333
+
+CMD ["/usr/local/bin/debade-courier", "-c", "/etc/debade/courier.yml", "tcp://0.0.0.0:3333"]

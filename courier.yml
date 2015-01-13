@@ -1,5 +1,3 @@
-zmq:
-  addr: ipc:///var/run/debade/courier.ipc
 servers:
   # my_server:
   #   host: <host>
