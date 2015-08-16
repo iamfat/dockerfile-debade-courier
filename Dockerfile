@@ -1,20 +1,12 @@
-FROM debian:7.6
-MAINTAINER jia.huang@geneegroup.com
+FROM alpine:3.2
 
-ENV DEBIAN_FRONTEND noninteractive
-
-# Install Basic Packages
-RUN apt-get update && apt-get install -y curl apt-utils python-pip python-dev
-
-# Install ZeroMQ
-RUN curl -sLo /usr/local/lib/libzmq.so.4.0.0 http://d.genee.cn/packages/zeromq-4/libzmq.so.4.0.0 && \
-    ldconfig && \
-    curl -sLo /usr/local/include/zmq.h http://d.genee.cn/packages/zeromq-4/zmq.h && \
-    curl -sLo /usr/local/include/zmq_utils.h http://d.genee.cn/packages/zeromq-4/zmq_utils.h
+RUN apk update && \
+    apk add py-pip gcc python-dev libzmq musl-dev g++ && \
+    rm -rf /var/cache/apk/*
 
 RUN pip install debade-courier && mkdir -p /etc/debade && mkdir -p /var/run/debade
 ADD courier.yml /etc/debade/courier.yml
 
 EXPOSE 3333
 
-CMD ["/usr/local/bin/debade-courier", "-c", "/etc/debade/courier.yml", "tcp://0.0.0.0:3333"]
+CMD ["/usr/bin/debade-courier", "-c", "/etc/debade/courier.yml", "tcp://0.0.0.0:3333"]
